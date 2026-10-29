@@ -32,17 +32,22 @@ jobs:
             throw "Failed to clone Scoop core"
           }
 
+ 
       - name: Update manifests
         shell: pwsh
         run: |
+          $ErrorActionPreference = "Stop"
           $scoopCore = Join-Path $env:RUNNER_TEMP "Scoop"
           $bucket = Join-Path $env:GITHUB_WORKSPACE "bucket"
 
           & "$scoopCore/bin/checkver.ps1" -Dir $bucket -Update -ThrowError
 
-          if ($LASTEXITCODE -ne 0) {
-            throw "Scoop checkver failed"
+          if ($?) {
+            Write-Host "Scoop checkver completed."
+          } else {
+            throw "Scoop checkver failed."
           }
+
 
       - name: Validate JSON manifests
         shell: pwsh
