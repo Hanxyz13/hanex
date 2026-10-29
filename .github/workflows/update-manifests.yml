@@ -1,0 +1,89 @@
+
+name: Update Scoop manifests
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-scoop-manifests
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout bucket
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Get Scoop core
+        shell: pwsh
+        run: |
+          $scoopCore = Join-Path $env:RUNNER_TEMP "Scoop"
+          git clone --depth 1 https://github.com/ScoopInstaller/Scoop.git $scoopCore
+          if ($LASTEXITCODE -ne 0) {
+            throw "Failed to clone Scoop core"
+          }
+
+      - name: Update manifests
+        shell: pwsh
+        run: |
+          $scoopCore = Join-Path $env:RUNNER_TEMP "Scoop"
+          $bucket = Join-Path $env:GITHUB_WORKSPACE "bucket"
+
+          & "$scoopCore/bin/checkver.ps1" -Dir $bucket -Update -ThrowError
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "Scoop checkver failed"
+          }
+
+      - name: Validate JSON manifests
+        shell: pwsh
+        run: |
+          Get-ChildItem "$env:GITHUB_WORKSPACE/bucket" -Filter "*.json" |
+            ForEach-Object {
+              try {
+                Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop |
+                  Out-Null
+              } catch {
+                throw "Invalid manifest: $($_.Name) - $($_.Exception.Message)"
+              }
+            }
+
+      - name: Commit and push updates
+        shell: pwsh
+        run: |
+          Set-Location $env:GITHUB_WORKSPACE
+
+          git diff --check
+          if ($LASTEXITCODE -ne 0) {
+            throw "git diff --check failed"
+          }
+
+          git add bucket
+
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No manifest updates."
+            exit 0
+          }
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "Update Scoop manifests"
+          if ($LASTEXITCODE -ne 0) {
+            throw "Git commit failed"
+          }
+
+          git push origin HEAD:main
+          if ($LASTEXITCODE -ne 0) {
+            throw "Git push failed"
+          }
