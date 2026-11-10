@@ -1,4 +1,3 @@
-
 name: Update Scoop manifests
 
 on:
@@ -32,22 +31,53 @@ jobs:
             throw "Failed to clone Scoop core"
           }
 
- 
       - name: Update manifests
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
+
           $scoopCore = Join-Path $env:RUNNER_TEMP "Scoop"
           $bucket = Join-Path $env:GITHUB_WORKSPACE "bucket"
 
+          # 1. 更新所有支持 checkver 的 Manifest
           & "$scoopCore/bin/checkver.ps1" -Dir $bucket -Update -ThrowError
 
-          if ($?) {
-            Write-Host "Scoop checkver completed."
-          } else {
+          if (-not $?) {
             throw "Scoop checkver failed."
           }
 
+          Write-Host "Scoop checkver completed."
+
+          # 2. 更新 RegCool SHA256
+          $manifestPath = Join-Path $bucket "regcool.json"
+
+          if (Test-Path $manifestPath) {
+            Write-Host "Updating RegCool hash..."
+
+            $manifest = Get-Content $manifestPath -Raw |
+              ConvertFrom-Json
+
+            $url = $manifest.architecture.'64bit'.url
+
+            if ([string]::IsNullOrWhiteSpace($url)) {
+              throw "RegCool download URL is missing."
+            }
+
+            $tempFile = Join-Path $env:RUNNER_TEMP "RegCoolX64.zip"
+
+            Invoke-WebRequest -Uri $url -OutFile $tempFile
+
+            $hash = (Get-FileHash $tempFile -Algorithm SHA256).Hash.ToLower()
+
+            $manifest.architecture.'64bit'.hash = $hash
+
+            $manifest |
+              ConvertTo-Json -Depth 100 |
+              Set-Content $manifestPath -Encoding utf8
+
+            Write-Host "RegCool version: $($manifest.version)"
+            Write-Host "RegCool SHA256: $hash"
+          }
 
       - name: Validate JSON manifests
         shell: pwsh

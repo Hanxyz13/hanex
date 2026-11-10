@@ -1,0 +1,31 @@
+
+{
+    "version": "3.1.0.8",
+    "description": "Advanced registry editor for Windows",
+    "homepage": "https://kurtzimmermann.com/downrc_en.html",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://kurtzimmermann.com/files/RegCoolX64.zip",
+            "hash": "eb631d28ee87e6ed1b390ff9bd667d87313618ec533cab51659acc5ff0091cd0"
+        }
+    },
+    "bin": "RegCool.exe",
+    "shortcuts": [
+        [
+            "RegCool.exe",
+            "RegCool"
+        ]
+    ],
+    "checkver": {
+        "url": "https://kurtzimmermann.com/downrc_en.html",
+        "regex": "Version\\s+([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://kurtzimmermann.com/files/RegCoolX64.zip"
+            }
+        }
+    }
+}
