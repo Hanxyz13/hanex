@@ -1,0 +1,29 @@
+
+{
+    "version": "1.3.1",
+    "description": "Monitor battery levels of wireless devices on Windows",
+    "homepage": "https://github.com/evren-oct/vigil-watt",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/evren-oct/vigil-watt/releases/download/v1.3.1/VigilWattApp-win-Portable.zip",
+            "hash": "0435f115ac9f71f9cdc892fdb1b6005a98d90c062ba16687fb947b1fa23cc29b"
+        }
+    },
+    "shortcuts": [
+        [
+            "current/VigilWatt.App.exe",
+            "VigilWatt"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/evren-oct/vigil-watt"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/evren-oct/vigil-watt/releases/download/v$version/VigilWattApp-win-Portable.zip"
+            }
+        }
+    }
+}
