@@ -113,7 +113,23 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git commit -m "Update Scoop manifests"
+          $changedFiles = git diff --cached --name-only -- bucket
+
+          $messages = foreach ($file in $changedFiles) {
+            $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
+            $manifestPath = Join-Path $env:GITHUB_WORKSPACE $file
+
+            try {
+              $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
+              "${name}: Update to version $($manifest.version)"
+            } catch {
+              "${name}: Update manifest"
+            }
+          }
+
+          $commitMessage = $messages -join "`n`n"
+
+          git commit -m $commitMessage
           if ($LASTEXITCODE -ne 0) {
             throw "Git commit failed"
           }
