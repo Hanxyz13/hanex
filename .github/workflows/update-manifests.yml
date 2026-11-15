@@ -2,7 +2,7 @@ name: Update Scoop manifests
 
 on:
   schedule:
-    - cron: "17 3 * * 6"
+    - cron: "0 20 * * 5"
   workflow_dispatch:
 
 permissions:
