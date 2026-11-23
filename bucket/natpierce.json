@@ -5,7 +5,7 @@
     "homepage": "https://www.natpierce.cn/pc/index/index.html",
     "license": "Unknown",
     "url": "https://download.natpierce.cn/windows/natpierce-win-v1.06.zip",
-    "hash": "BFAD4B33D8601C2D6BDCC8A21BAC887221C9E5E1A14F909D6A15221E7F08FA1B",
+    "hash": "bfad4b33d8601c2d6bdcc8a21bac887221c9e5e1a14f909d6a15221e7f08fa1b",
     "bin": "natpierce.exe",
     "checkver": {
         "url": "https://www.natpierce.cn/pc/downloads/index_new.html",
