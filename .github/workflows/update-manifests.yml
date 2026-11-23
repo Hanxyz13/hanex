@@ -48,36 +48,59 @@ jobs:
 
           Write-Host "Scoop checkver completed."
 
-          # 2. 更新 RegCool SHA256
-          $manifestPath = Join-Path $bucket "regcool.json"
 
-          if (Test-Path $manifestPath) {
-            Write-Host "Updating RegCool hash..."
+          # 2. 统一更新各软件 SHA256
+
+          function Update-ManifestHash {
+            param(
+              [string]$Name
+            )
+
+            $manifestPath = Join-Path $bucket "$Name.json"
+
+            if (-not (Test-Path $manifestPath)) {
+              throw "Manifest not found: $Name.json"
+            }
 
             $manifest = Get-Content $manifestPath -Raw |
               ConvertFrom-Json
 
-            $url = $manifest.architecture.'64bit'.url
-
-            if ([string]::IsNullOrWhiteSpace($url)) {
-              throw "RegCool download URL is missing."
+            # 自动识别下载地址所在位置
+            if ($manifest.architecture -and $manifest.architecture.'64bit') {
+              $target = $manifest.architecture.'64bit'
+            } else {
+              $target = $manifest
             }
 
-            $tempFile = Join-Path $env:RUNNER_TEMP "RegCoolX64.zip"
+            $url = $target.url
+
+            if ([string]::IsNullOrWhiteSpace($url)) {
+              throw "$Name download URL is missing."
+            }
+
+            Write-Host "Updating $Name SHA256..."
+
+            $tempFile = Join-Path $env:RUNNER_TEMP "$Name.zip"
 
             Invoke-WebRequest -Uri $url -OutFile $tempFile
 
             $hash = (Get-FileHash $tempFile -Algorithm SHA256).Hash.ToLower()
 
-            $manifest.architecture.'64bit'.hash = $hash
+            $target.hash = $hash
 
             $manifest |
               ConvertTo-Json -Depth 100 |
               Set-Content $manifestPath -Encoding utf8
 
-            Write-Host "RegCool version: $($manifest.version)"
-            Write-Host "RegCool SHA256: $hash"
+            Write-Host "$Name version: $($manifest.version)"
+            Write-Host "$Name SHA256: $hash"
           }
+
+          # 依次更新四个软件
+          Update-ManifestHash "regcool"
+          Update-ManifestHash "natpierce"
+          Update-ManifestHash "dart_simple_live"
+          Update-ManifestHash "sing-box-refind"
 
       - name: Validate JSON manifests
         shell: pwsh

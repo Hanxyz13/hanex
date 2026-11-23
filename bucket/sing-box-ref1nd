@@ -1,0 +1,16 @@
+
+{
+    "version": "1.14.4-reF1nd",
+    "description": "A universal proxy platform - reF1nd build",
+    "homepage": "https://github.com/reF1nd/sing-box-releases",
+    "license": "GPL-3.0-or-later",
+    "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-amd64v3.zip",
+    "hash": "d8c4d25cdcde526f34d66aaf99f712d12604c064aebe69843c6f4e3859edc4fc",
+    "bin": "sing-box.exe",
+    "checkver": {
+        "github": "https://github.com/reF1nd/sing-box-releases"
+    },
+    "autoupdate": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-amd64v3.zip"
+    }
+}
