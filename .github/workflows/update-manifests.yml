@@ -100,7 +100,8 @@ jobs:
           Update-ManifestHash "regcool"
           Update-ManifestHash "natpierce"
           Update-ManifestHash "dart_simple_live"
-          Update-ManifestHash "sing-box-refind"
+          Update-ManifestHash "sing-box-ref1nd"
+          Update-ManifestHash "sing-box-beta-ref1nd"
 
       - name: Validate JSON manifests
         shell: pwsh
