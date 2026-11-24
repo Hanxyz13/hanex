@@ -5,7 +5,18 @@
   "license": "GPL-3.0-or-later",
   "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.15.0-alpha.13-reF1nd/sing-box-1.15.0-alpha.13-reF1nd-windows-amd64v3.zip",
   "hash": "47e4a09c1d94bcf69c59f751865353132c78096fed180d3e7ce474b952130762",
-  "extract_dir": "sing-box-*-reF1nd-windows-amd64v3",
+  "pre_install": [
+    "$nestedDir = Get-ChildItem -LiteralPath $dir -Directory | Where-Object { Test-Path (Join-Path $_.FullName 'sing-box.exe') } | Select-Object -First 1",
+    "if ($nestedDir) {",
+    "    foreach ($file in @('sing-box.exe', 'libcronet.dll')) {",
+    "        $source = Join-Path $nestedDir.FullName $file",
+    "        if (Test-Path $source) {",
+    "            Move-Item -LiteralPath $source -Destination $dir -Force",
+    "        }",
+    "    }",
+    "    Remove-Item -LiteralPath $nestedDir.FullName -Recurse -Force",
+    "}"
+  ],
   "bin": "sing-box.exe",
   "checkver": {
     "github": "https://github.com/reF1nd/sing-box-releases",
