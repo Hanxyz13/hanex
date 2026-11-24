@@ -1,0 +1,16 @@
+{
+  "version": "1.19.34",
+  "description": "A fast, lightweight and efficient proxy platform - AMD64v3 build",
+  "homepage": "https://github.com/MetaCubeX/mihomo",
+  "license": "GPL-3.0",
+  "url": "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.34/mihomo-windows-amd64-v3-v1.19.34.zip",
+  "hash": "f1a81678517dee871b51858f2a62d190d014b389057c67db575d1ddba892d19b",
+  "pre_install": "Get-ChildItem \"$dir\\mihomo*.exe\" | Rename-Item -NewName 'mihomo.exe'",
+  "bin": "mihomo.exe",
+  "checkver": {
+    "github": "https://github.com/MetaCubeX/mihomo"
+  },
+  "autoupdate": {
+    "url": "https://github.com/MetaCubeX/mihomo/releases/download/v$version/mihomo-windows-amd64-v3-v$version.zip"
+  }
+}

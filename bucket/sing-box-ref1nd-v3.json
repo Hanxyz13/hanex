@@ -1,0 +1,35 @@
+{
+  "version": "1.14.4-reF1nd",
+  "description": "sing-box reF1nd amd64v3 optimized build",
+  "homepage": "https://github.com/reF1nd/sing-box-releases",
+  "license": "GPL-3.0-or-later",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-amd64v3.zip",
+      "hash": "d8c4d25cdcde526f34d66aaf99f712d12604c064aebe69843c6f4e3859edc4fc"
+    }
+  },
+  "pre_install": [
+    "$nestedDir = Get-ChildItem -LiteralPath $dir -Directory | Where-Object { Test-Path (Join-Path $_.FullName 'sing-box.exe') } | Select-Object -First 1",
+    "if ($nestedDir) {",
+    "    foreach ($file in @('sing-box.exe', 'libcronet.dll')) {",
+    "        $source = Join-Path $nestedDir.FullName $file",
+    "        if (Test-Path $source) {",
+    "            Move-Item -LiteralPath $source -Destination $dir -Force",
+    "        }",
+    "    }",
+    "    Remove-Item -LiteralPath $nestedDir.FullName -Recurse -Force",
+    "}"
+  ],
+  "bin": "sing-box.exe",
+  "checkver": {
+    "github": "https://github.com/reF1nd/sing-box-releases"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-amd64v3.zip"
+      }
+    }
+  }
+}
