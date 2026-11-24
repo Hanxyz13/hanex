@@ -1,10 +1,22 @@
 {
   "version": "1.15.0-alpha.13-reF1nd",
-  "description": "sing-box reF1nd Testing (Beta)",
+  "description": "A universal proxy platform - reF1nd build",
   "homepage": "https://github.com/reF1nd/sing-box-releases",
   "license": "GPL-3.0-or-later",
-  "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.15.0-alpha.13-reF1nd/sing-box-1.15.0-alpha.13-reF1nd-windows-amd64v3.zip",
-  "hash": "47e4a09c1d94bcf69c59f751865353132c78096fed180d3e7ce474b952130762",
+  "architecture": {
+    "32bit": {
+      "url": "https://github.com/reF1nd/sing-box-releases/releases/download/1.15.0-alpha.13-reF1nd/sing-box-1.15.0-alpha.13-reF1nd-windows-386-legacy-windows-7.zip",
+      "hash": "dac681f6b0e2b3427215c406c2d3db283bff7ec23c51c3e5d33e6adfaff812a2"
+    },
+    "64bit": {
+      "url": "https://github.com/reF1nd/sing-box-releases/releases/download/1.15.0-alpha.13-reF1nd/sing-box-1.15.0-alpha.13-reF1nd-windows-amd64.zip",
+      "hash": "b7174dde2bba6706f8d643ffa7bdab4ec6dac373d6688ffb4c265dae51dfd097"
+    },
+    "arm64": {
+      "url": "https://github.com/reF1nd/sing-box-releases/releases/download/1.15.0-alpha.13-reF1nd/sing-box-1.15.0-alpha.13-reF1nd-windows-arm64.zip",
+      "hash": "0c05483e7d4746d0133b73369e2fa1471f565427902cf91df078026c795d3072"
+    }
+  },
   "pre_install": [
     "$nestedDir = Get-ChildItem -LiteralPath $dir -Directory | Where-Object { Test-Path (Join-Path $_.FullName 'sing-box.exe') } | Select-Object -First 1",
     "if ($nestedDir) {",
@@ -23,6 +35,16 @@
     "regex": "(?i)v(\\d+\\.\\d+\\.\\d+-(?:alpha|beta)\\.\\d+-reF1nd)"
   },
   "autoupdate": {
-    "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-amd64v3.zip"
+    "architecture": {
+      "32bit": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-386-legacy-windows-7.zip"
+      },
+      "64bit": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-amd64.zip"
+      },
+      "arm64": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-arm64.zip"
+      }
+    }
   }
 }

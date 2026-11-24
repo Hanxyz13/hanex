@@ -3,8 +3,20 @@
   "description": "A universal proxy platform - reF1nd build",
   "homepage": "https://github.com/reF1nd/sing-box-releases",
   "license": "GPL-3.0-or-later",
-  "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-amd64v3.zip",
-  "hash": "d8c4d25cdcde526f34d66aaf99f712d12604c064aebe69843c6f4e3859edc4fc",
+  "architecture": {
+    "32bit": {
+      "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-386-legacy-windows-7.zip",
+      "hash": "01fa22ca4a9a52a8728ef9c30fec0d138d48d3aa74b25aeef5dfa656409ed645"
+    },
+    "64bit": {
+      "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-amd64.zip",
+      "hash": "sha256:6cfc8365b70ea2922ca2f2782754ac355f47b9d2178ab0475410c8c72dd5a9cf"
+    },
+    "arm64": {
+      "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-arm64.zip",
+      "hash": "7a71baec267971066275883c099de88d69b20c87389be206c62610ce4973b2f3"
+    }
+  },
   "pre_install": [
     "$nestedDir = Get-ChildItem -LiteralPath $dir -Directory | Where-Object { Test-Path (Join-Path $_.FullName 'sing-box.exe') } | Select-Object -First 1",
     "if ($nestedDir) {",
@@ -22,6 +34,16 @@
     "github": "https://github.com/reF1nd/sing-box-releases"
   },
   "autoupdate": {
-    "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-amd64v3.zip"
+    "architecture": {
+      "32bit": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-386-legacy-windows-7.zip"
+      },
+      "64bit": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-amd64.zip"
+      },
+      "arm64": {
+        "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v$version/sing-box-$version-windows-arm64.zip"
+      }
+    }
   }
 }
