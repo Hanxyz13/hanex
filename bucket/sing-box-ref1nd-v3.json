@@ -23,7 +23,8 @@
   ],
   "bin": "sing-box.exe",
   "checkver": {
-    "github": "https://github.com/reF1nd/sing-box-releases"
+    "github": "https://github.com/reF1nd/sing-box-releases",
+    "regex": "(?i)v(\\d+\\.\\d+\\.\\d+-reF1nd)"
   },
   "autoupdate": {
     "architecture": {
