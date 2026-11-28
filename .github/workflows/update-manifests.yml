@@ -96,12 +96,14 @@ jobs:
             Write-Host "$Name SHA256: $hash"
           }
 
-          # 依次更新四个软件
-          Update-ManifestHash "regcool"
-          Update-ManifestHash "natpierce"
+          # 依次更新
           Update-ManifestHash "dart_simple_live"
-          Update-ManifestHash "sing-box-ref1nd"
+          Update-ManifestHash "mihomo-v3"
+          Update-ManifestHash "natpierce"
+          Update-ManifestHash "sing-box-beta-ref1nd-v3"
           Update-ManifestHash "sing-box-beta-ref1nd"
+          Update-ManifestHash "sing-box-ref1nd-v3"
+          Update-ManifestHash "sing-box-ref1nd"
 
       - name: Validate JSON manifests
         shell: pwsh
