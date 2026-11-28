@@ -10,7 +10,7 @@
     },
     "64bit": {
       "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-amd64.zip",
-      "hash": "sha256:6cfc8365b70ea2922ca2f2782754ac355f47b9d2178ab0475410c8c72dd5a9cf"
+      "hash": "6cfc8365b70ea2922ca2f2782754ac355f47b9d2178ab0475410c8c72dd5a9cf"
     },
     "arm64": {
       "url": "https://github.com/reF1nd/sing-box-releases/releases/download/v1.14.4-reF1nd/sing-box-1.14.4-reF1nd-windows-arm64.zip",

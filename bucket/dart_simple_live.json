@@ -1,28 +1,28 @@
 {
-    "version": "1.13.3",
-    "description": "Cross-platform live streaming viewer",
-    "homepage": "https://github.com/June6699/dart_simple_live",
-    "license": "GPL-3.0",
-    "architecture": {
-        "64bit": {
-            "url": "https://github.com/June6699/dart_simple_live/releases/download/v1.13.3/SimpleLive-Windows-v1.13.3.zip",
-            "hash": "a46046468e6e210ec133fcdfabb177976d9756e09aabed6145a754e47d3652c5"
-        }
-    },
-    "checkver": {
-        "github": "https://github.com/June6699/dart_simple_live"
-    },
-    "shortcuts": [
-        [
-            "simple_live_app.exe",
-            "Simple Live"
-        ]
-    ],
-    "autoupdate": {
-        "architecture": {
-            "64bit": {
-                "url": "https://github.com/June6699/dart_simple_live/releases/download/v$version/SimpleLive-Windows-v$version.zip"
-            }
-        }
+  "version": "1.13.3",
+  "description": "Cross-platform live streaming viewer",
+  "homepage": "https://github.com/June6699/dart_simple_live",
+  "license": "GPL-3.0",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/June6699/dart_simple_live/releases/download/v1.13.3/SimpleLive-Windows-v1.13.3.zip",
+      "hash": "a46046468e6e210ec133fcdfabb177976d9756e09aabed6145a754e47d3652c5"
     }
+  },
+  "checkver": {
+    "github": "https://github.com/June6699/dart_simple_live"
+  },
+  "shortcuts": [
+    [
+      "simple_live_app.exe",
+      "Simple Live"
+    ]
+  ],
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/June6699/dart_simple_live/releases/download/v$version/SimpleLive-Windows-v$version.zip"
+      }
+    }
+  }
 }

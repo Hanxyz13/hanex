@@ -1,23 +1,22 @@
-
 {
-    "version": "1.06",
-    "description": "NatPierce - P2P network penetration tool",
-    "homepage": "https://www.natpierce.cn/pc/index/index.html",
-    "license": "Unknown",
-    "url": "https://download.natpierce.cn/windows/natpierce-win-v1.06.zip",
-    "hash": "bfad4b33d8601c2d6bdcc8a21bac887221c9e5e1a14f909d6a15221e7f08fa1b",
-    "bin": "natpierce.exe",
-    "checkver": {
-        "url": "https://www.natpierce.cn/pc/downloads/index_new.html",
-        "regex": "当前版本：v([\\d.]+)"
-    },
-    "shortcuts": [
-        [
-            "natpierce.exe",
-            "皎月连"
-        ]
-    ],
-    "autoupdate": {
-        "url": "https://download.natpierce.cn/windows/natpierce-win-v$version.zip"
-    }
+  "version": "1.06",
+  "description": "NatPierce - P2P network penetration tool",
+  "homepage": "https://www.natpierce.cn/pc/index/index.html",
+  "license": "Unknown",
+  "url": "https://download.natpierce.cn/windows/natpierce-win-v1.06.zip",
+  "hash": "bfad4b33d8601c2d6bdcc8a21bac887221c9e5e1a14f909d6a15221e7f08fa1b",
+  "bin": "natpierce.exe",
+  "checkver": {
+    "url": "https://www.natpierce.cn/pc/downloads/index_new.html",
+    "regex": "当前版本：v([\\d.]+)"
+  },
+  "shortcuts": [
+    [
+      "natpierce.exe",
+      "皎月连"
+    ]
+  ],
+  "autoupdate": {
+    "url": "https://download.natpierce.cn/windows/natpierce-win-v$version.zip"
+  }
 }
